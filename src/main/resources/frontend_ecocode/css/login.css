@@ -1,0 +1,61 @@
+body {
+    display: flex;
+    padding: 50px;
+    background: radial-gradient(circle, #0f0a0d 0%, #000000 60%, #25081a 100%);
+}
+
+.container {
+    margin: 0 auto;
+}
+
+fieldset {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    width: 30rem;
+    height: 25em;
+    background: #25081a;
+    padding: 15px;
+    gap: 0.5em;
+    align-items: center;
+}
+fieldset h2 {
+    text-align: center;
+    color: white;
+}
+label {
+    color: white;
+    margin-top: 2.3em;
+}
+input {
+    width: 30em;
+    height: 26px;
+    font-size: 13px;
+    border-radius: 4em;
+    border: 1px solid black;
+    font-family: sans-serif;
+    padding: 2px;
+    padding-left: 20px;
+}
+.enviar {
+    text-align: center;
+    font-weight: 600;
+    margin-top: 17px;
+    padding: 2px;
+    width: 10em;
+    height: 2.4em;
+    border-radius: 40px;
+    font-size: 1em;
+    border: 2px solid black;
+    letter-spacing: 1px;
+    margin: 0 auto;
+    background: rgb(56, 56, 56);
+    color: white;
+    margin-top: 45px;
+}
+.enviar:hover {
+    background: white;
+    color: black;
+    transition: 0.2s;
+    cursor: pointer;
+}

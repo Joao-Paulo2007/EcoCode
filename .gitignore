@@ -4,6 +4,12 @@ target/
 !**/src/test/**/target/
 .kotlin
 
+### Variáveis de ambiente ###
+.env
+
+### Dados Importantes
+arquivos/*
+
 ### IntelliJ IDEA ###
 .idea/modules.xml
 .idea/jarRepositories.xml

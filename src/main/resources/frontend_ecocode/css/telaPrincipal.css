@@ -1,0 +1,89 @@
+body{
+    background-color: aliceblue;
+}
+header {
+    display: flex;
+    justify-content: space-between;
+    width: 83%;
+    margin: 0 auto;
+    margin-top: 2em;
+}
+header nav {
+    display: flex;
+}
+.h-op {
+    display: flex;
+    align-items: center;
+    border: 2px black solid;
+    height: 2.7em;
+    padding: 0.7em;
+    border-radius: 0px 12px 0px 11px;
+    cursor: pointer;
+}
+.h-op:hover {
+    color: aliceblue;
+    background: black;
+    border: 2px aliceblue solid;
+    border-bottom: 1px solid black;
+}
+
+
+.container {
+    border: 2px solid black;
+    width: 83%;
+    height: 80vh;
+    margin: 0 auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    align-items: center;
+    padding: 10px;
+}
+
+.Adds {
+    top: 2px;
+    display: flex;
+    margin-left: auto;
+    width: 15em;
+    height: 1.5em;
+    justify-self: flex-end;
+    align-self: flex-start;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-items: center;
+}
+
+#Filtros {
+    appearance: none;
+    width: 10em;
+    border: 1px solid black;
+    border-radius: 4px;
+    text-align: center;
+}
+.Editar {
+    display: flex;
+    border: 1px solid black;
+    background: rgb(245, 245, 9);
+    padding: 2px;
+    width: 1.3em;
+    height: 1.3em;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+}
+.Deletar {
+    display: flex;
+    border: 1px solid black;
+    background: red;
+    padding: 2px;
+    width: 1.3em;
+    height: 1.3em;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-weight: bold;
+    cursor: pointer;
+}
+.ListaVazia {
+    position: absolute;
+}
