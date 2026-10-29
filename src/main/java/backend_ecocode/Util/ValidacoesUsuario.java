@@ -20,6 +20,10 @@ public class ValidacoesUsuario {
         if(!ValidarEmail.ehValido(email)){
             throw new IllegalArgumentException("E-mail inválido");
         }
+
+        if(ValidarEmail.emailExiste(email)){
+            throw new IllegalArgumentException("Email já cadastrado para um usuário");
+        }
     }
 
     private void validarCpfUsuario(String cpf) {

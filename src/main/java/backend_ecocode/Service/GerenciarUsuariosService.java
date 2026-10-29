@@ -26,6 +26,11 @@ public class GerenciarUsuariosService implements ServiceUsuarioInterface {
             );
         }
 
+        // GerenciarUsuariosService.cadastrar, logo depois da checagem do CPF
+        if (gerenciarUsuariosRepository.buscarEmail(email) != null) {
+            throw new IllegalArgumentException("Já existe um usuário com esse e-mail.");
+        }
+
         if (gerenciarUsuariosRepository.buscar(ValidadorCpf.limpar(cpf)) != null) {
             throw new IllegalArgumentException("Já existe um usuário com esse CPF.");
         }
@@ -62,6 +67,15 @@ public class GerenciarUsuariosService implements ServiceUsuarioInterface {
         if (usuario == null) {
             throw new IllegalArgumentException("Usuário não encontrado.");
         }
+        return usuario;
+    }
+
+    @Override
+    public Usuario buscarEmail(String email) {
+        if(!ValidarEmail.ehValido(email)) throw new AcessoNegadoException("Insira um e-mail válido");
+
+        Usuario usuario = gerenciarUsuariosRepository.buscarEmail(email);
+
         return usuario;
     }
 

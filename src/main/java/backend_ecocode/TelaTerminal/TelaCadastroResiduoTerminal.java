@@ -1,18 +1,117 @@
-package backend_ecocode.Tela;
+package backend_ecocode.TelaTerminal;
 
-import backend_ecocode.Domain.TipoResiduo;
+import backend_ecocode.Domain.CargoUsuario;
 import backend_ecocode.Domain.Residuo;
+import backend_ecocode.Domain.TipoResiduo;
+import backend_ecocode.Domain.Usuario;
 import backend_ecocode.Service.GerenciarResiduosService;
+
 import java.util.List;
 import java.util.Scanner;
 
 public class TelaCadastroResiduoTerminal {
 
-    private Scanner sc;
+    private final Scanner sc;
     private final GerenciarResiduosService service = new GerenciarResiduosService();
+    private final Usuario usuarioLogado;
+    private final TelaGerenciarUsuariosTerminal telaUsuarios;
 
-    public TelaCadastroResiduoTerminal(Scanner sc) {
+    // recebe o Scanner da tela de login e o usuário que entrou
+    public TelaCadastroResiduoTerminal(Scanner sc, Usuario usuarioLogado) {
         this.sc = sc;
+        this.usuarioLogado = usuarioLogado;
+        this.telaUsuarios = new TelaGerenciarUsuariosTerminal(sc, usuarioLogado);
+    }
+
+    public void telaResiduo(){
+
+        // o cargo não muda durante a sessão, então basta conferir uma vez
+        boolean ehGerente = usuarioLogado.getCargoUsuario() == CargoUsuario.GERENTE;
+
+        int opcao;
+
+        do {
+
+            System.out.println("\n================================");
+            System.out.println("RECICLA +");
+            System.out.println("(Menos lixo e um mundo melhor)");
+            System.out.println("================================");
+            System.out.println("Usuário: " + usuarioLogado.getNomeCompleto()
+                    + " (" + usuarioLogado.getCargoUsuario() + ")");
+
+            System.out.println("\n1 - Cadastrar um resíduo");
+            System.out.println("2 - Verificar lista de resíduos");
+            System.out.println("3 - Verificar quantidade de resíduos");
+            System.out.println("4 - Listar resíduos por categoria");
+            System.out.println("5 - Excluir um resíduo");
+            System.out.println("6 - Editar um resíduo");
+
+            if (ehGerente) {
+                System.out.println("8 - Cadastrar um usuário");
+                System.out.println("9 - Listar usuários");
+            }
+
+            System.out.println("7 - Sair");
+
+            System.out.print("\nEscolha uma opção: ");
+            opcao = lerInteiro();
+
+            switch (opcao) {
+
+                case 1:
+                    telaCadastrarResiduo();
+                    break;
+
+                case 2:
+                    listar_residuos();
+                    break;
+
+                case 3:
+                    System.out.println("\n--- QUANTIDADE ---");
+                    System.out.println("Quantidade de cadastros: " + service.quantidadeResiduosCadastrados());
+                    System.out.println("Quantidade total de resíduos: " + service.quantidadeTotalResiduos());
+                    break;
+
+                case 4:
+                    listarCategoriaResiduo();
+                    break;
+
+                case 5:
+                    excluirResiduo();
+                    break;
+
+                case 6:
+                    editarResiduo();
+                    break;
+
+                case 7:
+                    System.out.println("\nEncerrando o programa...");
+                    break;
+
+                case 8:
+                    if (ehGerente) telaUsuarios.cadastrarUsuario();
+                    else System.out.println("\nOpção inválida!");
+                    break;
+
+                case 9:
+                    if (ehGerente) telaUsuarios.listarUsuarios();
+                    else System.out.println("\nOpção inválida!");
+                    break;
+
+                default:
+                    System.out.println("\nOpção inválida!");
+            }
+        } while (opcao != 7);
+    }
+
+    // lê uma linha e converte para número; devolve -1 se não for número
+    private int lerInteiro() {
+        String linha = sc.nextLine().trim();
+        try {
+            return Integer.parseInt(linha);
+        } catch (NumberFormatException e) {
+            return -1;
+        }
     }
 
     public void telaCadastrarResiduo() {
@@ -27,8 +126,7 @@ public class TelaCadastroResiduoTerminal {
         }
 
         System.out.print("Qual a quantidade? ");
-        int quantidade = sc.nextInt();
-        sc.nextLine(); // limpa o buffer
+        int quantidade = lerInteiro();
 
         System.out.print("Descrição (opcional, aperte Enter para pular): ");
         String descricao = sc.nextLine();
@@ -114,7 +212,7 @@ public class TelaCadastroResiduoTerminal {
         System.out.println("1 - Ordem de cadastro");
         System.out.println("2 - Ordem de código");
         System.out.print("Escolha: ");
-        String ordem = sc.nextLine();
+        String ordem = sc.nextLine().trim();
 
         List<Residuo> lista = ordem.equals("2") ? service.listarPorCodigo() : service.listar();
 
@@ -143,8 +241,7 @@ public class TelaCadastroResiduoTerminal {
         }
 
         System.out.print("Digite o número da opção: ");
-        byte opcaoDigitada = sc.nextByte();
-        sc.nextLine(); // limpa o buffer
+        int opcaoDigitada = lerInteiro();
 
         for (TipoResiduo tipo : TipoResiduo.values()) {
             if (tipo.getResto() == opcaoDigitada) {

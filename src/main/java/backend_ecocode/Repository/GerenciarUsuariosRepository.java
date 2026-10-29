@@ -55,6 +55,14 @@ public class GerenciarUsuariosRepository implements RepositoryUsuarioInterface {
         gravar();
     }
 
+    @Override
+    public Usuario buscarEmail(String email) {
+        return usuarios.values().stream()
+                .filter(usuario -> usuario.getEmail().equalsIgnoreCase(email))
+                .findFirst()
+                .orElse(null);
+    }
+
     private void gravar(){
         persistencia.salvar(listar());
     }

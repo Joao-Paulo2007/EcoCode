@@ -3,6 +3,7 @@ package backend_ecocode;
 import backend_ecocode.Domain.Usuario;
 import backend_ecocode.Service.GerenciarUsuariosService;
 import backend_ecocode.Util.CifraCesar;
+import backend_ecocode.Util.Configuracao;
 
 public class Teste {
 
@@ -24,7 +25,7 @@ public class Teste {
 //            System.out.println("Chave " + chave + ": " + tentativas.get(chave));
 //        }
 
-        Usuario user = gerenciarUsuariosService.buscar("065.314.921-20");
+        Usuario user = gerenciarUsuariosService.buscar("06531492120");
         System.out.println(user.getNomeCompleto());
         System.out.println(user.getDataNascimento());
 

@@ -25,10 +25,6 @@ public class Configuracao {
         return lerChave("CIFRA_AFIM_B");
     }
 
-    public int getValorCondicaoDescriptografia() {
-        return lerChave("VALOR_CONDICAO");
-    }
-
 
     // lê a variável, confere se é um inteiro e devolve entre 0 e 25
     private int lerChave(String nome) {
